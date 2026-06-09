@@ -65,12 +65,12 @@ else
         \tslirp4netns:10.0.2.2'
         for rootless_docker_host in $ROOTLESS_DOCKER_HOSTS
         do
-            rootless_docker_network_driver="${rootless_docker_host%%:*}"
-            rootless_docker_host_ip="${rootless_docker_host#*:}"
-            if _check_ping "$rootless_docker_host_ip"
+            potential_network_driver="${rootless_docker_host%%:*}"
+            potential_docker_host_ip="${rootless_docker_host#*:}"
+            if _check_ping "$potential_docker_host_ip"
             then
-                docker_host_source="well-known rootless host address ($rootless_docker_network_driver)"
-                docker_host_ip="$rootless_docker_host_ip"
+                docker_host_source="well-known rootless host address ($potential_network_driver)"
+                docker_host_ip="$potential_docker_host_ip"
                 break
             fi
         done
